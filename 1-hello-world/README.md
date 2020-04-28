@@ -21,7 +21,8 @@ app.get('/', (req, res) => res.send('Hello World!'))
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
 ```
-5. From the root of the project in your terminal run the following code
+5. In package.json in the root change the main to ```"main": "app.js",```
+6. From the root of the project in your terminal run the following code
 ```
 node app.js
 ```
