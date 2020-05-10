@@ -1,5 +1,5 @@
 const express = require("express");
-var exphbs = require("express-handlebars");
+const exphbs = require("express-handlebars");
 
 const app = express();
 const port = 3000;
