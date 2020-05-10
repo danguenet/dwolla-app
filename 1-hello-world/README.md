@@ -17,7 +17,7 @@ npm install express --save
 
 4. Create app.js file in root of project and add the following code
 
-```
+```javascript
 const express = require("express");
 const app = express();
 const port = 3000;
