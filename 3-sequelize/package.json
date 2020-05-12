@@ -1,0 +1,14 @@
+{
+  "name": "2-views-and-templating",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^4.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
