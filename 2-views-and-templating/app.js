@@ -7,7 +7,7 @@ const port = 3000;
 app.engine("handlebars", exphbs());
 app.set("view engine", "handlebars");
 
-app.get("/", function (req, res) {
+app.get("/", (req, res) => {
   res.render("home");
 });
 
