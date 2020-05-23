@@ -88,7 +88,7 @@ The content for the app's home view which will be rendered into the layout's {{{
 7. Install Nodemon
 
 ```
-npm install --save-dev nodemon
+npm install nodemon --save-dev
 ```
 
 8. In package.json replaced the test script with the following
