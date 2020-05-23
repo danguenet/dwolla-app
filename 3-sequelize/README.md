@@ -1,9 +1,9 @@
 # Sequelize
 
-1. Globally install sequelize-cli
+1. Install sequelize-cli as a developer dependency
 
 ```
-npm install -g sequelize-cli
+npm install sequelize-cli --save-dev
 ```
 
 2. Install `sequelize`, `pg`, `pg-promise`, and `dotenv`
@@ -58,7 +58,7 @@ DEV_DB_PASSWORD=admin
 DEV_DB_NAME=postgres
 ```
 
-7. Update app.js to add this code below under port but above handlebars
+7. Update app.js to add this code below after `const port = 3000;`
 
 ```javascript
 require("dotenv").config();
