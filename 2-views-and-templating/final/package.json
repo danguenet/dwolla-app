@@ -1,5 +1,5 @@
 {
-  "name": "2-views-and-templating",
+  "name": "dwolla-app",
   "main": "app.js",
   "scripts": {
     "dev": "nodemon app"

@@ -11,3 +11,4 @@ module.exports = {
     use_env_variable: process.env.PROD_DB_URL,
   },
 };
+console.log(process.env.DEV_DB_PASSWORD)
