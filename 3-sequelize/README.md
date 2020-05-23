@@ -1,9 +1,9 @@
 # Sequelize
 
-1. Install sequelize-cli as a developer dependency
+1. Globally install sequelize-cli
 
 ```
-npm install sequelize-cli --save-dev
+npm install -g sequelize-cli
 ```
 
 2. Install `sequelize`, `pg`, `pg-promise`, and `dotenv`
@@ -58,7 +58,7 @@ DEV_DB_PASSWORD=admin
 DEV_DB_NAME=postgres
 ```
 
-7. Update app.js to add this code below after `const port = 3000;`
+7. Update app.js to add this code below under `const port` but above `handlebars`
 
 ```javascript
 require("dotenv").config();
@@ -67,26 +67,39 @@ const db = require("./server/models");
 db.sequelize.sync();
 ```
 
-8. Download [PostgreSQL](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads). Please save the password you use in your password manager.
+8. Create `docker-compose.yml` file in the root directory and copy the following config:
+```
+version: '3.1'
+   
+   services:
+   
+     db:
+       image: postgres
+       restart: always
+       environment:
+         POSTGRES_PASSWORD: admin
+       networks:
+         - test
+   
+   networks:
+     test:
+       driver: bridge
+```
 
-9. Open pgAdmin 4 app and do the following
+9. To manage postgres, add npm scripts called `build-db` and `cleanup-db`:
+ ```
+"scripts": {
+    "dev": "nodemon app",
+    "build-db": "docker-compose up -d",
+    "cleanup-db": "docker-compose down"
+  },
+```
 
-- create new server
-  - name `localhost`
-  - hostname `localhost`
-  - port `5432`
-  - username `postgres`
-  - the password should be the same one you used when you downloaded PostgreSQL
+10. To start postgres, run `npm run build-db` in your terminal
 
-10. In your console run `npm run dev` and you should see this output:
+11. In your terminal run `npm run dev` and you should see this output:
 
 ```
 Dwolla App listening at http://localhost:3000
 Executing (default): SELECT 1+1 AS result
 ```
-
-## Resources
-
-- https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
-- https://www.enterprisedb.com/edb-docs/d/postgresql/reference/manual/12.2/tutorial-createdb.html
-- https://www.enterprisedb.com/postgres-tutorials/connecting-postgresql-using-psql-and-pgadmin
