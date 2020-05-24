@@ -3,7 +3,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon app",
-    "build": "docker-compose up -d",
+    "build-db": "docker-compose up -d",
     "cleanup": "docker-compose down"
   },
   "dependencies": {
