@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "nodemon app",
     "build-db": "docker-compose up -d",
-    "cleanup": "docker-compose down"
+    "cleanup-db": "docker-compose down"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
