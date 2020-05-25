@@ -1,5 +1,5 @@
 {
-  "name": "dwolla-app",
+  "name": "final",
   "main": "app.js",
   "scripts": {
     "dev": "nodemon app",
