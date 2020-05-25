@@ -1,38 +1,57 @@
 # Sequelize
 
-1. Globally install sequelize-cli
-
-```
-npm install -g sequelize-cli
-```
-
-2. Install `sequelize`, `pg`, `pg-promise`, and `dotenv`
+1. Install `sequelize`, `pg`, `pg-promise`, and `dotenv`
 
 ```
 npm install sequelize pg pg-hstore dotenv
 
 ```
 
-3. Create `.sequelizerc` file in the root of your project with the following code
+2. Create a folder in the root of your project called `server`. Within that folder make two folders called `config` and `models`.
+
+3. In  the `models` folder create a file called `index.js` and place the following code in it:
 
 ```javascript
-const path = require("path");
+'use strict';
 
-module.exports = {
-  config: path.resolve("server/config", "config.js"),
-  "models-path": path.resolve("server", "models"),
-  "seeders-path": path.resolve("server", "seeders"),
-  "migrations-path": path.resolve("server", "migrations"),
-};
+const fs = require('fs');
+const path = require('path');
+const Sequelize = require('sequelize');
+const basename = path.basename(__filename);
+const env = process.env.NODE_ENV || 'development';
+const config = require(__dirname + '/../config/config.js')[env];
+const db = {};
+
+let sequelize;
+if (config.use_env_variable) {
+  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+} else {
+  sequelize = new Sequelize(config.database, config.username, config.password, config);
+}
+
+fs
+  .readdirSync(__dirname)
+  .filter(file => {
+    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
+  })
+  .forEach(file => {
+    const model = sequelize['import'](path.join(__dirname, file));
+    db[model.name] = model;
+  });
+
+Object.keys(db).forEach(modelName => {
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
+  }
+});
+
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
+
+module.exports = db;
 ```
 
-4. Initialize Sequelize in the terminal
-
-```
-sequelize init
-```
-
-5. Replace `server/config/config.js` with
+4. In the `config` folder create a file called `config.js` and add this code:
 
 ```javascript
 module.exports = {
@@ -50,7 +69,7 @@ module.exports = {
 };
 ```
 
-6. Create a `.env` file in the root of your project. Replace admin with the password you used while downloading PostgreSQL.
+5. Create a `.env` file in the root of your project:
 
 ```
 DEV_DB_USERNAME=postgres
@@ -58,7 +77,7 @@ DEV_DB_PASSWORD=admin
 DEV_DB_NAME=postgres
 ```
 
-7. Update app.js to add this code below under `const port` but above `handlebars`
+6. Update app.js to add this code below under `const port` but above `handlebars`
 
 ```javascript
 require("dotenv").config();
@@ -67,7 +86,7 @@ const db = require("./server/models");
 db.sequelize.sync();
 ```
 
-8. Create `docker-compose.yml` file in the root directory and copy the following config:
+7. Create `docker-compose.yml` file in the root directory and copy the following config:
 ```
 version: '3.1'
    
@@ -86,7 +105,7 @@ version: '3.1'
        driver: bridge
 ```
 
-9. To manage postgres, add npm scripts called `build-db` and `cleanup-db`:
+8. To manage postgres, add npm scripts called `build-db` and `cleanup-db`:
  ```
 "scripts": {
     "dev": "nodemon app",
@@ -95,9 +114,9 @@ version: '3.1'
   },
 ```
 
-10. To start postgres, run `npm run build-db` in your terminal
+9. To start postgres, run `npm run build-db` in your terminal
 
-11. In your terminal run `npm run dev` and you should see this output:
+10. In your terminal run `npm run dev` and you should see this output:
 
 ```
 Dwolla App listening at http://localhost:3000
