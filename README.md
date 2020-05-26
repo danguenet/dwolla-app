@@ -6,6 +6,7 @@ This repo contains each module from a Dwolla IT/IS Lunch and Learn. It showcases
 
 1. Download [Node.js](https://nodejs.org/en/download/)
 2. Download [Docker](https://www.docker.com/products/docker-desktop)
+3. Review `Introduction-to-node`
 
 ## Getting Started
 
