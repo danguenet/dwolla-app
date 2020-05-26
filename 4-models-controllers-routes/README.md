@@ -82,7 +82,7 @@ npm install bcryptjs express-session connect-flash
 </div>
 ```
 
-3. Create a `controllers` folder in your `server` folder. Then creat a file within it called `views.js`:
+4. Create a `controllers` folder in your `server` folder. Then creat a file within it called `views.js`:
 
 ```javascript
 const viewHome = (req, res) => {
@@ -99,7 +99,7 @@ module.exports = {
 };
 ```
 
-4. In the `server` folder create a file called `routes.js`:
+5. In the `server` folder create a file called `routes.js`:
 
 ```javascript
 const express = require("express");
@@ -114,7 +114,7 @@ router.get("/register", viewsController.viewRegister);
 module.exports = router;
 ```
 
-5. In your `app.js` file, replace the following code:
+6. In your `app.js` file, replace the following code:
 ```javascript
 app.get("/", (req, res) => {
   res.render("home");
@@ -156,9 +156,9 @@ app.use(function(req, res, next) {
 
 then in your `.env` file add a session secret.
 
-6. In your terminal run `npm run dev` and check both `http://localhost:3000/` and `http://localhost:3000/register`
+7. In your terminal run `npm run dev` and check both `http://localhost:3000/` and `http://localhost:3000/register`
 
-7. Now let's create the login view and add the related controller and route. In the `views` folder, create `login.handlebars`:
+8. Now let's create the login view and add the related controller and route. In the `views` folder, create `login.handlebars`:
 
 ```javascript
 <div class="row mt-5">
@@ -185,7 +185,7 @@ then in your `.env` file add a session secret.
 </div>
 ```
 
-8. Now in the `server/controllers/views.js` let's add the login function:
+9. Now in the `server/controllers/views.js` let's add the login function:
 
 ```javascript
 const viewLogin = (req, res) => {
@@ -195,12 +195,12 @@ const viewLogin = (req, res) => {
 
 and don't forget to add `viewLogin` to the module export.
 
-9. Finally in the `server/routes.js` file add the following code:
+10. Finally in the `server/routes.js` file add the following code:
 ```javascript
 router.get("/login", viewsController.viewLogin);
 ```
 
-10. Now let's add functionality to the register page. In the `models` folder create a file called `users.js`:
+11. Now let's add functionality to the register page. In the `models` folder create a file called `users.js`:
 
 ```javascript
 const users = (db, DataTypes) => {
@@ -234,13 +234,13 @@ const users = (db, DataTypes) => {
   module.exports = users;
 ```
 
-11. Update the `db.sequelize.sync();` line in app.js to:
+12. Update the `db.sequelize.sync();` line in app.js to:
 
 ```javascript
 db.sequelize.sync({ force: true, logging: false }); // force: true isn't ideal for prod
 ```
 
-12. In the `controllers` folder create a `register.js` file:
+13. In the `controllers` folder create a `register.js` file:
 
 ```javascript
 const bcrypt = require("bcryptjs");
@@ -313,7 +313,7 @@ const register = (req, res)  => {
 module.exports = register;
 ```
 
-13. In the routes.js file add the require the register controller:
+14. In the routes.js file add the require the register controller:
 
 ```javascript
 const registerController = require("./controllers/register");
