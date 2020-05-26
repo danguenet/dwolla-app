@@ -96,20 +96,22 @@ db.sequelize.sync();
 7. Create `docker-compose.yml` file in the root directory and copy the following config:
 ```
 version: '3.1'
-   
-   services:
-   
-     db:
-       image: postgres
-       restart: always
-       environment:
-         POSTGRES_PASSWORD: admin
-       networks:
-         - test
-   
-   networks:
-     test:
-       driver: bridge
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: admin
+    networks:
+      - db
+    ports:
+      - 5432:5432
+
+
+networks:
+  db:
+    driver: bridge
 ```
 
 8. To manage postgres, add npm scripts called `build-db` and `cleanup-db`:
