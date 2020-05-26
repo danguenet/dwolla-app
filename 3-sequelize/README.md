@@ -77,6 +77,13 @@ DEV_DB_PASSWORD=admin
 DEV_DB_NAME=postgres
 ```
 
+Don't forget to add this file to your .gitignore:
+
+```
+node_modules
+.env
+```
+
 6. Update app.js to add this code below under `const port` but above `handlebars`
 
 ```javascript
