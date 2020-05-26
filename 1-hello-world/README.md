@@ -1,7 +1,7 @@
 # Hello World
 
-1. Download [Node.js](https://nodejs.org/en/)
-2. Create your application
+1. In your terminal navigate to where you want your application to live.
+2. Create your application by running this in your terminal:
 
 ```
 mkdir myapp
@@ -12,7 +12,7 @@ npm init
 3. Install Express.js
 
 ```
-npm install express --save
+npm install express
 ```
 
 4. Create app.js file in root of project and add the following code
